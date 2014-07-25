@@ -1,0 +1,5 @@
+--compilers coffee:coffee-script/register
+--require .
+--timeout 2000
+--reporter spec
+--recursive

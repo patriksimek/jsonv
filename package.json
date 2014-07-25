@@ -1,0 +1,36 @@
+{
+	"author": {
+		"name": "Patrik Simek",
+		"url": "http://patriksimek.cz"
+	},
+	"name": "jsonv",
+	"description": "JSON Validator.",
+	"keywords": [
+		"packager"
+	],
+	"version": "0.1.0",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/patriksimek/jsonv"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://opensource.org/licenses/mit-license.php"
+		}
+	],
+	"dependencies": {
+		
+	},
+	"devDependencies": {
+		"coffee-script": "^1.7.1",
+		"mocha": "^1.12.0"
+	},
+	"engines": {
+		"node": ">=0.6"
+	},
+	"scripts": {
+		"test": "./node_modules/.bin/mocha"
+	}
+}
