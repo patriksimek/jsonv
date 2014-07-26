@@ -1,4 +1,4 @@
-# jsonv [![Dependency Status](https://david-dm.org/patriksimek/jsonv.png)](https://david-dm.org/patriksimek/jsonv) [![NPM version](https://badge.fury.io/js/jsonv.png)](http://badge.fury.io/js/jsonv)
+# jsonv [![Dependency Status](https://david-dm.org/patriksimek/jsonv.png)](https://david-dm.org/patriksimek/jsonv) [![NPM version](https://badge.fury.io/js/jsonv.png)](http://badge.fury.io/js/jsonv) [![Build Status](https://secure.travis-ci.org/patriksimek/jsonv.png)](http://travis-ci.org/patriksimek/jsonv)
 
 JSON Validator.
 
@@ -47,7 +47,34 @@ __Arguments__
 - **options**
   - **maxLength** - Check maximum length of JSON string (default: `null`).
   - **followRefs** - Allow `$ref` keyword (JSON Pointer) in JSON document (default: `false`).
-- **callback(err)** - A callback which is called after connection has established, or an error has occurred. Optional.
+- **callback(err)** - A callback which is called after validation has ended, or an error has occurred. Optional.
+
+__Errors__
+
+If an errro occur, `JSONValidationError` is thrown. It has property `suberrors` that contains list of all validation errros.
+
+---------------------------------------
+
+### JSON.addSchema(schema)
+
+Add schema to list of locally cached schemas. Each schema must have `$schema` header present.
+
+__Arguments__
+
+- **schema** - Validation schema. A JSON string or parsed structure.
+
+---------------------------------------
+
+### JSON.loadRemoteSchema(url, callback)
+
+Load remote schema and add it to list of locally cached schemas. Each schema must have `$schema` header present.
+
+__Arguments__
+
+- **url** - URL address.
+- **callback(err. schema)** - A callback which is called after loading has ended, or an error has occurred.
+
+---------------------------------------
 
 ### Schema Structure
 
