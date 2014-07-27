@@ -6,9 +6,16 @@
 	"name": "jsonv",
 	"description": "JSON Validator.",
 	"keywords": [
-		"packager"
+		"json",
+		"schema",
+		"validator",
+		"validation",
+		"jsv",
+		"jsonschema",
+		"json-schema",
+		"tv4"
 	],
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"main": "index.js",
 	"repository": {
 		"type": "git",

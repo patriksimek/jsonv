@@ -14,7 +14,7 @@ require('jsonv');
 
 #### Synchronous validation
 
-```
+```javascript
 try {
 	parsed = JSON.validate('1', {type: 'integer'});
 } catch (err) {
@@ -25,7 +25,7 @@ try {
 
 #### Asynchronous validation
 
-```
+```javascript
 JSON.validate('1', {type: 'integer'}, function(err, parsed) {
 	if (err) {
 		console.log(err.message);
@@ -72,7 +72,7 @@ Load remote schema and add it to list of locally cached schemas. Each schema mus
 __Arguments__
 
 - **url** - URL address.
-- **callback(err. schema)** - A callback which is called after loading has ended, or an error has occurred.
+- **callback(err, schema)** - A callback which is called after loading has ended, or an error has occurred.
 
 ---------------------------------------
 
