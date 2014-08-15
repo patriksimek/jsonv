@@ -582,7 +582,7 @@ JSON.loadRemoteSchema = (url, callback) ->
 	options = require('url').parse url
 	options.method = 'GET'
 	
-	req = require('http').request options, (res) ->
+	req = require(if options.protocol is 'https:' then 'https' else 'http').request options, (res) ->
 		data = ''
 		
 		if res.statusCode isnt 200
