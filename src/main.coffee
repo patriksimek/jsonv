@@ -7,6 +7,8 @@ RESOLVE_TYPE = (json) ->
 		when 'object'
 			if Array.isArray json
 				return 'array'
+			if json instanceof Date
+				return 'date'
 			else
 				return 'object'
 		else
@@ -54,7 +56,7 @@ JSON.TYPE_VALIDATOR =
 		if DEBUG then console.log 'OBJ', path
 		#console.log 'OBJ', json, schema
 			
-		if not json? or typeof json isnt 'object' or Array.isArray json
+		if not json? or typeof json isnt 'object' or Array.isArray(json) or json instanceof Date
 			@error = new Error "Expected object at path '#{path}'."
 			return json
 		
@@ -271,6 +273,19 @@ JSON.TYPE_VALIDATOR =
 		
 		unless typeof json is 'boolean'
 			@error = new Error "Expected boolean at path '#{path}'."
+			return json
+		
+		json
+	
+	date: (json, schema, path) ->
+		if DEBUG then console.log 'DAT', path
+		#console.log 'BOO', json, schema
+		
+		if not json? and schema.default?
+			return schema.default
+		
+		if json not instanceof Date
+			@error = new Error "Expected date at path '#{path}'."
 			return json
 		
 		json
