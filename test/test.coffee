@@ -76,6 +76,16 @@ describe 'JSON Validator', ->
 			assert.strictEqual result.mynums[2], 14
 	
 			done()
+	
+	it 'should validate document size', (done) ->
+		json = '{"mynum": 11, "mynums": [{"$ref": "#/mynum"}, {"$ref": "#/mynum"}, 14]}'
+		schema = 
+			type: "object"
+			
+		JSON.validate json, schema, {maxLength: 10}, (err, result) ->
+			assert.ok err
+			
+			JSON.validate json, schema, {maxLength: 100}, done
 
 readDir = (dirname) ->
 	for dir in (dir for dir in fs.readdirSync(dirname) when not fs.lstatSync("#{dirname}/#{dir}").isDirectory())

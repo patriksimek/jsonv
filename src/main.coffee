@@ -525,14 +525,6 @@ VALIDATE = (document, schema, path = '/', depth = 1) ->
 ###
 
 SYNC = (document, schema, options) ->
-	# --- Pre-validations ---
-	
-	if options.maxLength and typeof document is 'string'
-		if document.length > options.maxLength
-			throw new Error "Maximum JSON size exceeded."
-	
-	# --- Validations ---
-
 	context =
 		document: document
 		schema: schema
@@ -556,7 +548,22 @@ JSON.validate = (document, schema, options, callback) ->
 	options ?= {}
 	options.async = callback?
 
+	if not document?
+		err = new Error "Not a JSON string."
+	
+	if not err and Buffer.isBuffer document
+		document = document.toString 'utf8'
+	
+	if not err and 'string' isnt typeof document.toString()
+		err = new Error "Not a JSON string."
+	
+	if not err and options.maxLength
+		if document.length > options.maxLength
+			err = new Error "Maximum JSON size exceeded."
+
 	if options.async
+		if err then return callback err
+		
 		try
 			document = new Document document
 			schema = JSON.addSchema schema
@@ -570,6 +577,8 @@ JSON.validate = (document, schema, options, callback) ->
 				callback ex
 	
 	else
+		if err then throw err
+		
 		document = new Document document
 		schema = JSON.addSchema schema
 		return SYNC document, schema, options
