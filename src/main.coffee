@@ -479,6 +479,7 @@ VALIDATE = (document, schema, path = '/', depth = 1) ->
 	{suberrors, document} = VALIDATE_SUBSCHEMA.call context, document, schema, path, depth
 	
 	if suberrors.length
+		if DEBUG then console.error "ERR #{err.message}" for err in suberrors
 		errors.push err for err in suberrors
 		return document: document, errors: errors
 	
@@ -549,17 +550,17 @@ JSON.validate = (document, schema, options, callback) ->
 	options.async = callback?
 
 	if not document?
-		err = new Error "Not a JSON string."
+		err = new JSONValidationError "Not a JSON string."
 	
 	if not err and Buffer.isBuffer document
 		document = document.toString 'utf8'
 	
 	if not err and 'string' isnt typeof document.toString()
-		err = new Error "Not a JSON string."
+		err = new JSONValidationError "Not a JSON string."
 	
 	if not err and options.maxLength
 		if document.length > options.maxLength
-			err = new Error "Maximum JSON size exceeded."
+			err = new JSONValidationError "Maximum JSON size exceeded."
 
 	if options.async
 		if err then return callback err

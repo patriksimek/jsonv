@@ -15,7 +15,7 @@
 		"json-schema",
 		"tv4"
 	],
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"main": "index.js",
 	"repository": {
 		"type": "git",
@@ -27,17 +27,15 @@
 			"url": "http://opensource.org/licenses/mit-license.php"
 		}
 	],
-	"dependencies": {
-		
-	},
 	"devDependencies": {
 		"coffee-script": "1.7.1",
-		"mocha": "1.21.0"
+		"mocha": "^5.2.0"
 	},
 	"engines": {
 		"node": ">=0.6"
 	},
 	"scripts": {
+		"build": "coffee -c -b -o lib src",
 		"test": "./node_modules/.bin/mocha"
 	},
 	"bin": {
